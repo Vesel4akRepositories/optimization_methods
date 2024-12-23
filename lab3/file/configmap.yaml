@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shw-config
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>HW toje poidet</title> <!-HW=hello world-->
+    </head>
+    <body>
+        <h1>Super HW in HTML!</h1>
+    </body>
+    </html>

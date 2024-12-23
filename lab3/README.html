@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>3&period; &Pcy;&ocy;&dcy;&ncy;&yacy;&tcy;&softcy; kubernetes &kcy;&lcy;&acy;&scy;&tcy;&iecy;&rcy; &lcy;&ocy;&kcy;&acy;&lcy;&softcy;&ncy;&ocy; &icy; &pcy;&ocy;&kcy;&acy;&zcy;&acy;&tcy;&softcy; &rcy;&acy;&bcy;&ocy;&chcy;&icy;&jcy; &scy;&iecy;&rcy;&vcy;&icy;&scy;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="3-поднять-kubernetes-кластер-локально-и-показать-рабочий-сервис">3. Поднять kubernetes кластер локально и показать рабочий сервис</h1>
+<hr>
+<h2 id="установка-minikube-с-помощью-прямой-ссылки-и-kubectl">Установка Minikube с помощью прямой ссылки и kubectl</h2>
+<pre><code>curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  &amp;&amp; chmod +x minikube
+</code></pre>
+<p>Чтобы исполняемый файл Minikube был доступен из любой директории выполните следующие команды:</p>
+<pre><code>sudo mkdir -p /usr/local/bin/
+sudo install minikube /usr/local/bin/
+</code></pre>
+<p><img src="file:///c:\Users\Rubick\Desktop\lab-3\img\1.jpg" alt="minikube_inst-scr"></p>
+<p><strong>С Minikube разобрались, теперь kubectl</strong></p>
+<pre><code>sudo snap install kubectl --classic
+</code></pre>
+<p><img src="file:///c:\Users\Rubick\Desktop\lab-3\img\2.jpg" alt="kubectl_inst-scr"></p>
+<p><strong>Все что нужно установить - установленно, за работу</strong></p>
+<hr>
+<h2 id="стартуем-в-minikube-и-напишем-service-deployment-и-configmap">Стартуем в minikube и Напишем service, deployment и configmap</h2>
+<p>Запускаем minikube командой:</p>
+<pre><code>minikube start
+</code></pre>
+<p><img src="file:///c:\Users\Rubick\Desktop\lab-3\img\3.jpg" alt="minikube_start-scr"></p>
+<p>Далее создаем файлы service, deployment и configmap</p>
+<p><strong>service.yaml</strong></p>
+<pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Service</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">shw-service</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">NodePort</span>
+  <span class="hljs-attr">ports:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">port:</span> <span class="hljs-number">80</span>
+    <span class="hljs-attr">targetPort:</span> <span class="hljs-number">80</span>
+    <span class="hljs-attr">nodePort:</span> <span class="hljs-number">31234</span>
+  <span class="hljs-attr">selector:</span>
+    <span class="hljs-attr">app:</span> <span class="hljs-string">hw</span>
+
+</code></pre>
+<p><strong>deployment.yaml</strong></p>
+<pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">shw-deployment</span>
+<span class="hljs-attr">spec:</span>
+  <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span>
+  <span class="hljs-attr">selector:</span>
+    <span class="hljs-attr">matchLabels:</span>
+      <span class="hljs-attr">app:</span> <span class="hljs-string">hw</span>
+  <span class="hljs-attr">template:</span>
+    <span class="hljs-attr">metadata:</span>
+      <span class="hljs-attr">labels:</span>
+        <span class="hljs-attr">app:</span> <span class="hljs-string">hw</span>
+    <span class="hljs-attr">spec:</span>
+      <span class="hljs-attr">containers:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">hw</span>
+        <span class="hljs-attr">image:</span> <span class="hljs-string">nginx:alpine</span>
+        <span class="hljs-attr">ports:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">80</span>
+        <span class="hljs-attr">volumeMounts:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">html</span>
+          <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/usr/share/nginx/html</span>
+      <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">html</span>
+        <span class="hljs-attr">configMap:</span>
+          <span class="hljs-attr">name:</span> <span class="hljs-string">shw-config</span>
+
+
+</code></pre>
+<p><strong>configmap.yaml</strong></p>
+<pre><code class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span>
+<span class="hljs-attr">kind:</span> <span class="hljs-string">ConfigMap</span>
+<span class="hljs-attr">metadata:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">shw-config</span>
+<span class="hljs-attr">data:</span>
+  <span class="hljs-attr">index.html:</span> <span class="hljs-string">|
+    &lt;!DOCTYPE html&gt;
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;HW toje poidet&lt;/title&gt; &lt;!-HW=hello world--&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Super HW in HTML!&lt;/h1&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</span>
+
+</code></pre>
+<hr>
+<h2 id="развораразворачивать-кодом-из-yaml-и-смотрим-что-получаем-в-результате">Развораразворачивать кодом из yaml и смотрим что получаем в результате</h2>
+<p><strong>Развернем все ресурсы с помощью</strong></p>
+<pre><code>kubectl apply -f deployment.yaml -f service.yaml -f configmap.yaml
+</code></pre>
+<p><img src="file:///c:\Users\Rubick\Desktop\lab-3\img\4.jpg" alt="apply-scr"></p>
+<p><strong>Проверяем</strong></p>
+<pre><code>minikube service shw-service --url
+</code></pre>
+<p><img src="file:///c:\Users\Rubick\Desktop\lab-3\img\5.jpg" alt="service-scr"></p>
+<p><strong>Глянем результат</strong></p>
+<p><img src="file:///c:\Users\Rubick\Desktop\lab-3\img\6.jpg" alt="result-scr"></p>
+<p><strong>Получаем вывод SUPER HW in HTML!</strong></p>
+
+            
+            
+        </body>
+        </html>
